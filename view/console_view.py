@@ -6,11 +6,19 @@ class GameConsoleView(GameView):
         super().__init__(board, controller)
 
     def display_board(self):
+        for x in range(len(self.board)):
+            for y in range(len(self.board)):
+                if self.board[x][y] == 0:
+                    print("_")
+                else:
+                    print(self.board[x][y].symbol)
+
 
     def display_curr_player(self, player):
         print(f"Player {player_symbol[player]}'s turn.")
 
-    def request_move(self, i = None, j = None, piece = None):
+    # i, j -> Previous piece : x, y -> Piece location after move
+    def request_move(self, i = None, j = None, x = None, y = None):
         move = input("Enter your move (")
 
     def display_illegal_move(self):

@@ -4,10 +4,19 @@ from model.color import Color
 
 
 class Piece(ABC):
-    def __init__(self, color: Color):
+    def __init__(self, color: Color, score: int):
         # color of piece
         super().__init__()
         self.color = color
+        self.score = score
+        self.text_symbol = None
+        self.image = None
+        self.update_rep()
+
+
+    @abstractmethod
+    def update_rep(self):
+        pass
 
     @abstractmethod
     def get_possible_moves(self, i, j):
@@ -36,51 +45,6 @@ class Piece(ABC):
     col6 = range(5, 62, +8)
     col7 = range(6, 63, +8)
     col8 = range(7, 64, +8)
-
-
-class Knight(Piece):
- 
-    Object Representing a Knight
-
-    - Can move 2 spaces forward / backward and 1 space left / right
-    - Can move 1 space forward / backward and 2 spaces left / right
-
-
-    black_text = '♘'
-    # black_image =
-
-    white_text = '♞'
-    # white_image =
-
-
-class Bishop(Piece):
-
-    Object Representing a Bishop
-
-    - Can move up to 8 spaces diagonally
-
-
-    black_text = '♗'
-    # black_image =
-
-    white_text = '♝'
-    # white_image =
-
-
-class Rook(Piece):
-
-    Object Representing a Rook
-
-    - Can move up to 8 spaces horizontally or vertically
-
-
-    black_text = '♖'
-    # black_iamge =
-
-    white_text = '♜'
-    # white_image =
-
-
 class Queen(Piece):
 
     Object Representing a Queen

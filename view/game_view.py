@@ -15,7 +15,7 @@ class GameView(ABC):
         pass
 
     @abstractmethod
-    def request_move(self, i=None, j=None):
+    def request_move(self, i=None, j=None, x=None, y=None):
         """ Asks for next move from user """
         pass
 

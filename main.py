@@ -17,13 +17,19 @@ def print_hi(name):
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
+    """
     board = Game()
+    print(" ", end="")
+    for x in range(8):
+        print("",x, end="")
+    print("")
     for j in range(8):
+        print(j, end="")
         for i in range(8):
             if board.board[i][j] != 0:
                 print(board.board[i][j].text_symbol, end="")
             else:
                 print(" ", end="")
         print("")
-
+    """
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/

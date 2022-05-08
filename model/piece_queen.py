@@ -2,7 +2,7 @@ from model.color import Color
 from model.piece import Piece
 
 
-class Rook(Piece):
+class Queen(Piece):
     def __init__(self, color: Color):
         super().__init__(color, 10)
 

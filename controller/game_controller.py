@@ -41,6 +41,7 @@ class Controller:
         winner = self.model.get_winner()
         self.view.display_winner(winner)
 
+    # TODO: PLAY_TURN and figure out MOVE LOGIC (ABSTRACT?)
     def play_turn(self, piece_x, piece_y, move_x, move_y):
 
     def get_move(self):

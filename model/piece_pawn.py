@@ -35,3 +35,10 @@ class Pawn(Piece):
                 valid_moves.remove(move)
 
         return valid_moves
+
+    def check_move(self, piece_x, piece_y, move_x, move_y, board):
+        if piece_x == move_x and board[move_x][move_y] != 0:
+            return False
+        if board[move_x][move_y] != 0 and board[move_x][move_y].color == self.color:
+            return False
+        return True

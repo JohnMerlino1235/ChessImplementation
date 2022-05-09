@@ -21,7 +21,8 @@ class Controller:
 
             if self.model.board[piece_x][piece_y] == 0 \
                     or self.model.board[piece_x][piece_y].color != self.model.curr_player.color:
-                self.view.display_illegal_piece
+                self.view.display_illegal_move()
+                piece_x, piece_y, move_x, move_y = self.get_move()
 
             valid_moves = self.model.board[piece_x][piece_y].get_possible_moves(piece_x, piece_y)
 
@@ -43,6 +44,26 @@ class Controller:
 
     # TODO: PLAY_TURN and figure out MOVE LOGIC (ABSTRACT?)
     def play_turn(self, piece_x, piece_y, move_x, move_y):
+        game_ended = False
+
+        while not self.model.is_legal_move(piece_x, piece_y, move_x, move_y):
+            self.view.display_illegal_move
+            return -1
+
+        self.model.make_move(piece_x, piece_y, move_x, move_y)
+
+        if self.model.is_checkmate():
+            game_ended = True
+
+        else:
+            self.model.change_turn()
+            # Check for stalemate here
+
+        if game_ended:
+            self.game_over()
+        else:
+            self.view.display_board()
+            self.view.display_curr_player(self.model.curr_player)
 
     def get_move(self):
         move = [0]
@@ -79,3 +100,5 @@ class Controller:
         # self.model.update_elo(self.model.get_winner())
         self.view.display_winner(self.model.get_winner())
 
+    # Possible reset game method here
+    # def reset_game(self):

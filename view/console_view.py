@@ -23,10 +23,10 @@ class GameConsoleView(GameView):
         piece = input("Enter the piece you want to move")
         move = input("Enter the location you want to move the piece to")
         return piece, move
-
+"""
     def display_illegal_piece(self):
         print("This is not a valid piece. Try again.")
-
+"""
     def display_illegal_move(self):
         print("This move is illegal. Try again.")
 

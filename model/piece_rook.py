@@ -31,4 +31,37 @@ class Rook(Piece):
                 valid_moves.append((i, j - (change + 1)))
         return valid_moves
 
+    def check_move(self, piece_x, piece_y, move_x, move_y, board):
+        if board[move_x][move_y] != 0 and board[move_x][move_y].color == self.color:
+            return False
+
+        if move_x > piece_x:
+            right = True
+        elif move_x < piece_x:
+            left = True
+        elif move_y > piece_y:
+            up = True
+        elif move_y < piece_y:
+            down = True
+
+        if right or left:
+            in_between = abs(piece_x - move_x) - 1
+        elif up or down:
+            in_between = abs(piece_y - move_y) - 1
+
+        for change in range(in_between):
+            if right and board[piece_x + (change + 1)][piece_y] != 0:
+                return False
+
+            elif left and board[piece_x - (change + 1)][piece_y] != 0:
+                return False
+
+            elif up and board[piece_x][piece_y + (change + 1)] != 0:
+                return False
+
+            elif down and board[piece_x][piece_y - (change + 1)] != 0:
+                return False
+
+        return True
+
 

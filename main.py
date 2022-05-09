@@ -17,11 +17,11 @@ def print_hi(name):
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    """
+
     board = Game()
-    print(" ", end="")
+    print(" 0 1 2 3 4 5 6 7 ")
     for x in range(8):
-        print("",x, end="")
+        print(x, end="")
     print("")
     for j in range(8):
         print(j, end="")
@@ -31,5 +31,3 @@ if __name__ == '__main__':
             else:
                 print(" ", end="")
         print("")
-    """
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/

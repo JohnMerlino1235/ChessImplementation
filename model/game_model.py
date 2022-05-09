@@ -12,10 +12,10 @@ from model.player import Player
 
 class Game:
     def __init__(self):
-        # set board -> 0 if no piece, 1 if Black Piece, 2 if White Piece
-        self.board = np.zeros((8, 8), dtype = object)
+        # set board -> 0 if no piece, Piece Object if Piece
+        self.board = np.zeros((8, 8), dtype=object)
         self.create_board()
-        self.curr_player = Player.W
+        self.curr_player = Player.WHITE
 
     def create_board(self):
         self.board[0][0] = Rook(Color.BLACK)
@@ -38,3 +38,24 @@ class Game:
         for i in range(8):
             self.board[i][1] = Pawn(Color.BLACK)
             self.board[i][6] = Pawn(Color.WHITE)
+
+    def is_legal_move(self, piece_x, piece_y, move_x, move_y):
+        if self.board[piece_x][piece_y] == 0:
+            return False
+        if self.board[piece_x][piece_y].color != self.curr_player.color:
+            return False
+
+        valid_moves = self.board[piece_x][piece_y].get_possible_moves(piece_x, piece_y)
+
+        if not valid_moves:
+            return False
+
+        if (move_x, move_y) not in valid_moves:
+            return False
+
+        if not self.board[piece_x][piece_y].check_move(piece_x, piece_y, move_x, move_y, self.board):
+            return False
+
+        # Check for valid move in piece class!
+        return self.board[piece_x][piece_y].check_move(move_x, move_y)
+

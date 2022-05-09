@@ -22,6 +22,9 @@ class Piece(ABC):
     def get_possible_moves(self, i, j):
         pass
 
+    @abstractmethod
+    def check_move(self, piece_x, piece_y, move_x, move_y, board):
+
     """
     # global values represent rows and columns on a board
 

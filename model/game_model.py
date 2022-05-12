@@ -15,7 +15,9 @@ class Game:
         # set board -> 0 if no piece, Piece Object if Piece
         self.board = np.zeros((8, 8), dtype=object)
         self.create_board()
-        self.curr_player = Player.WHITE
+        self.player_white = Player("White", Color.WHITE)
+        self.player_black = Player("Black", Color.BLACK)
+        self.curr_player = self.player_white
 
     def create_board(self):
         self.board[0][0] = Rook(Color.BLACK)
@@ -58,4 +60,25 @@ class Game:
 
         # Check for valid move in piece class!
         return self.board[piece_x][piece_y].check_move(move_x, move_y)
+
+    def make_move(self, piece_x, piece_y, move_x, move_y):
+        if self.board[move_x][move_y] != 0:
+            captured_piece = self.board[move_x][move_y]
+            # Update score
+            self.curr_player.update_captured(captured_piece)
+            # add captured piece to current player's captured piece array
+            # self.curr_player.captured_pieces(captured_piece)
+        self.board[move_x][move_y] = self.board[piece_x][piece_y]
+        self.board[piece_x][piece_y] = 0
+
+    def change_turn(self):
+        if self.curr_player == self.player_white:
+            self.curr_player = self.player_black
+        else:
+            self.curr_player = self.player_white
+
+
+
+
+
 

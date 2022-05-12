@@ -7,6 +7,8 @@ class Player:
         self.color = color
         # self.elo = update_elo_from_db
         self.score = 0
+        self.captured_pieces = []
 
-    def update_score(self, change):
-        self.score += change
+    def update_captured(self, piece):
+        self.score += piece.score
+        self.captured_piece.append(piece.text_symbol)

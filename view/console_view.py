@@ -1,4 +1,3 @@
-from model.player import player_symbol
 from view.game_view import GameView
 
 
@@ -23,10 +22,7 @@ class GameConsoleView(GameView):
         piece = input("Enter the piece you want to move")
         move = input("Enter the location you want to move the piece to")
         return piece, move
-"""
-    def display_illegal_piece(self):
-        print("This is not a valid piece. Try again.")
-"""
+
     def display_illegal_move(self):
         print("This move is illegal. Try again.")
 
@@ -40,3 +36,8 @@ class GameConsoleView(GameView):
     def display_score(self, player_one, player_two):
         print("White's Score:", player_one.score)
         print("Black's Score:", player_two.score)
+
+    """
+        def display_illegal_piece(self):
+            print("This is not a valid piece. Try again.")
+    """

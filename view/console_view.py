@@ -15,7 +15,7 @@ class GameConsoleView(GameView):
             print("")
 
     def display_curr_player(self, player):
-        print(f"Player {player_symbol[player]}'s turn.")
+        print(f"Player {player.color}'s turn.")
 
     # i, j -> Previous piece : x, y -> Piece location after move
     def request_move(self, i=None, j=None, x=None, y=None):
@@ -28,7 +28,11 @@ class GameConsoleView(GameView):
 
     def display_winner(self, winner):
         if winner != 0:
-            print(f'Player {player_symbol[winner]} has won the game! Congratulations!')
+            print(f'Player {winner.color} has won the game! Congratulations!')
+
+    def display_no_legal_moves(self, player):
+        if self.model.is_checkmate(player):
+            print(f'Player {player.color} has been checkmated!')
 
     def display_exit(self):
         print("Exiting game")

@@ -18,6 +18,7 @@ class Controller:
             self.view.display_curr_player(self.model.curr_player)
 
             piece_x, piece_y, move_x, move_y = self.get_move()
+            print(piece_x, piece_y, move_x, move_y)
 
             if self.model.board[piece_x][piece_y] == 0 \
                     or self.model.board[piece_x][piece_y].color != self.model.curr_player.color:
@@ -68,15 +69,16 @@ class Controller:
     def get_move(self):
         move = [0]
         valid = False
-        while len(move) != 2 and not valid:
-            move = self.model.curr_player.receive_move()
+        while not valid:
+            piece = self.view.request_piece()
+            move = self.view.request_move()
             if move == "exit":
                 return [(-1, -1), (-1, -1)]
             try:
-                piece = move[0].split(',')
+                piece = piece.split(',')
                 piece_x = int(piece[0])
                 piece_y = int(piece[1])
-                move = move[1].split(',')
+                move = move.split(',')
                 move_x = int(move[0])
                 move_y = int(move[1])
                 valid = True

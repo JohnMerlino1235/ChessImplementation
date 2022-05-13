@@ -6,22 +6,25 @@ class GameConsoleView(GameView):
         super().__init__(board, controller)
 
     def display_board(self):
-        for j in range(len(self.board)):
-            for i in range(len(self.board)):
-                if self.board[i][j] == 0:
+        for j in range(len(self.board.board)):
+            for i in range(len(self.board.board)):
+                if self.board.board[i][j] == 0:
                     print(" ", end="")
                 else:
-                    print(self.board[i][j].text_symbol, end="")
+                    print(self.board.board[i][j].text_symbol, end="")
             print("")
 
     def display_curr_player(self, player):
         print(f"Player {player.color}'s turn.")
 
+    def request_piece(self, i=None, j=None):
+        piece = input("Enter the piece you want to move:")
+        return piece
+
     # i, j -> Previous piece : x, y -> Piece location after move
     def request_move(self, i=None, j=None, x=None, y=None):
-        piece = input("Enter the piece you want to move")
-        move = input("Enter the location you want to move the piece to")
-        return piece, move
+        move = input("Enter the location you want to move the piece to:")
+        return move
 
     def display_illegal_move(self):
         print("This move is illegal. Try again.")

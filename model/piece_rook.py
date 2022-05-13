@@ -32,7 +32,7 @@ class Rook(Piece):
         return valid_moves
 
     def check_move(self, piece_x, piece_y, move_x, move_y, board):
-        if board[move_x][move_y] != 0 and board[move_x][move_y].color == self.color:
+        if board[move_x][move_y].color == self.color:  # board[move_x][move_y] != 0 and board[move_x][move_y].color == self.color:
             return False
 
         if move_x > piece_x:
@@ -63,5 +63,3 @@ class Rook(Piece):
                 return False
 
         return True
-
-

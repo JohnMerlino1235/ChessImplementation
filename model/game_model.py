@@ -55,14 +55,7 @@ class Game:
         if (move_x, move_y) not in valid_moves:
             return False
 
-        if not self.board[piece_x][piece_y].check_move(piece_x, piece_y, move_x, move_y, self.board):
-            return False
-
-        if self.board[move_x][move_y].color == self.curr_player.color:
-            return False
-
-        # Check for valid move in piece class!
-        return self.board[piece_x][piece_y].check_move(move_x, move_y)
+        return self.board[piece_x][piece_y].check_move(piece_x, piece_y, move_x, move_y, self.board)
 
     def make_move(self, piece_x, piece_y, move_x, move_y):
         if self.board[move_x][move_y] != 0:

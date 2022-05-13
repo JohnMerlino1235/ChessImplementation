@@ -58,6 +58,9 @@ class Game:
         if not self.board[piece_x][piece_y].check_move(piece_x, piece_y, move_x, move_y, self.board):
             return False
 
+        if self.board[move_x][move_y].color == self.curr_player.color:
+            return False
+
         # Check for valid move in piece class!
         return self.board[piece_x][piece_y].check_move(move_x, move_y)
 
@@ -77,7 +80,11 @@ class Game:
         else:
             self.curr_player = self.player_white
 
-
+"""
+    def is_checkmate(self, player):
+        if self.is_attacked(piece_x, piece_y):
+            return self.board[piece_x][piece_y].get_possible_moves(piece_x, piece_y)
+"""
 
 
 

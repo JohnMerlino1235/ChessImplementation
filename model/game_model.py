@@ -73,11 +73,13 @@ class Game:
         else:
             self.curr_player = self.player_white
 
-"""
+
     def is_checkmate(self, player):
+        return False
+        """
         if self.is_attacked(piece_x, piece_y):
             return self.board[piece_x][piece_y].get_possible_moves(piece_x, piece_y)
-"""
+        """
 
 
 

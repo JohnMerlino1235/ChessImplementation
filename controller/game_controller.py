@@ -18,7 +18,6 @@ class Controller:
             self.view.display_curr_player(self.model.curr_player)
 
             piece_x, piece_y, move_x, move_y = self.get_move()
-            print(piece_x, piece_y, move_x, move_y)
 
             if self.model.board[piece_x][piece_y] == 0 \
                     or self.model.board[piece_x][piece_y].color != self.model.curr_player.color:
@@ -33,7 +32,7 @@ class Controller:
 
             self.model.make_move(piece_x, piece_y, move_x, move_y)
 
-            if self.model.is_checkmate():
+            if self.model.is_checkmate(self.model.curr_player):
                 game_ended = True
 
             else:

@@ -15,6 +15,7 @@ class Controller:
 
         while not game_ended:
             self.view.display_board()
+            self.view.display_score(self.model.player_white, self.model.player_black)
             self.view.display_curr_player(self.model.curr_player)
 
             piece_x, piece_y, move_x, move_y = self.get_move()
@@ -39,6 +40,7 @@ class Controller:
                 self.model.change_turn()
 
         self.view.display_board()
+        self.view.display_score(self.model.player_white, self.model.player_black)
         winner = self.model.get_winner()
         self.view.display_winner(winner)
 
@@ -100,6 +102,9 @@ class Controller:
         self.view.display_board()
         # self.model.update_elo(self.model.get_winner())
         self.view.display_winner(self.model.get_winner())
+
+    def reset_game(self, player, size, turn, board=None):
+        self.model = Game()
 
     # Possible reset game method here
     # def reset_game(self):

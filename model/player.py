@@ -11,7 +11,7 @@ class Player:
 
     def update_captured(self, piece):
         self.score += piece.score
-        self.captured_piece.append(piece.text_symbol)
+        self.captured_pieces.append(piece)
 
     def receive_move(self, i, j):
         return i, j

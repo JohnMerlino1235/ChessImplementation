@@ -2,7 +2,7 @@ from view.game_view import GameView
 
 
 class GameConsoleView(GameView):
-    def __init__(self, board, controller: GameView):
+    def __init__(self, board, controller):
         super().__init__(board, controller)
 
     def display_board(self):
@@ -40,9 +40,17 @@ class GameConsoleView(GameView):
     def display_exit(self):
         print("Exiting game")
 
-    def display_score(self, player_one, player_two):
-        print("White's Score:", player_one.score)
-        print("Black's Score:", player_two.score)
+    def display_score(self, player_white, player_black):
+        print("White's Score:", player_white.score)
+        print("Captured by White:", end="")
+        for white_captured in player_white.captured_pieces:
+            print(white_captured.text_symbol, end="")
+        print("")
+        print("Black's Score:", player_black.score)
+        print("Captured by Black:", end="")
+        for black_captured in player_black.captured_pieces:
+            print(black_captured.text_symbol, end="")
+        print("")
 
     """
         def display_illegal_piece(self):

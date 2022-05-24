@@ -4,14 +4,13 @@ import tkinter as tk
 import tkinter.messagebox
 from tkinter import messagebox
 
-from PIL import ImageTk
+from PIL import ImageTk, Image
 
 from controller.game_controller import Controller
 from model.color import Color
 from model.game_model import Game
 from model.player import Player
 from view.game_view import GameView
-
 
 class GUIView(tk.Tk):
     def __init__(self, game_controller: Controller, model: Game):
@@ -123,14 +122,17 @@ class PlayPage(tk.Frame, GameView):
         player_white = self.controller.game_controller.model.player_white
         player_black = self.controller.game_controller.model.player_black
         self.invalid_move_label.grid_forget()
-        for i in range(self.board_size):
-            for j in range(self.board_size):
+        for j in range(self.board_size):
+            for i in range(self.board_size):
                 if self.board[i][j] != 0:
-                    photo = ImageTk.PhotoImage(tk.Image.open(self.board[i][j].image))
-                    self.buttons[i][j].configure(image=photo)
-                    self.buttons[i][j].configure(self.request_piece(i, j))
+                    photo = Image.open(self.board[i][j].image)
+                    resized_photo = photo.resize((45, 45))
+                    photo2 = ImageTk.PhotoImage(resized_photo)
+                    self.buttons[i][j].configure(image=photo2)
+                    self.buttons[i][j].configure(self.request_move(i, j, None, None))
+        self.update()
 
-
+        """
         for i in range(self.board_size):
             for j in range(self.board_size):
                 if self.board[i][j] == player_one.num and self.buttons[i][j].cget(
@@ -141,7 +143,7 @@ class PlayPage(tk.Frame, GameView):
                         'bg') != self.controller.game_controller.model.get_player(self.board[i][j]).color.value:
                     self.buttons[i][j].configure(bg=player_two.color.value)
                     self.buttons[i][j].configure(command=None)
-        self.update()
+                    """
 
     def display_curr_player(self, player):
         pass
@@ -163,22 +165,37 @@ class PlayPage(tk.Frame, GameView):
             self.board = board
         self.controller.game_controller.reset_game(player, self.board_size, board, turn)
         self.board = self.controller.game_controller.model.board
-        self.set_buttons()
+        self.display_board()
         self.display_curr_player(self.controller.game_controller.model.curr_player)
-
-
 
     def request_move(self, i=None, j=None, x=None, y=None):
         pass
 
     def set_buttons(self):
-        pass
+        for j in range(self.board_size):
+            for i in range(self.board_size):
+                if i % 2 == 0:
+                    if j % 2 == 0:
+                        background = "white smoke"
+                    else:
+                        background = "green"
+                else:
+                    if j % 2 == 0:
+                        background = "green"
+                    else:
+                        background = "white smoke"
+                button = 0
+                self.buttons.append(button)
+                self.buttons[i][j] = tk.Button(self, image = None, bg=background,
+                                               command=lambda i=i, j=j:
+                                               self.request_move(i, j, None, None))
+                self.buttons[i][j].grid(row=j, column=i, sticky='nsew')
 
 
 if __name__ == "__main__":
     game = Game()
     controller = Controller(game)
     game_view = GUIView(controller, game.board)
-    controller.set_view(game_view.frames["LoginPage"])
+    controller.set_view(game_view.frames["PlayPage"])
 
     game_view.mainloop()

@@ -1,3 +1,5 @@
+from tkinter import PhotoImage
+
 from model.color import Color
 from model.piece import Piece
 
@@ -10,8 +12,10 @@ class King(Piece):
     def update_rep(self):
         if self.color == Color.BLACK:
             self.text_symbol = '♔'
+            self.image = r"C:\Users\janth\PycharmProjects\ChessImplementation\Piece Images\b_king_png_256px.png"
         else:
             self.text_symbol = '♚'
+            self.image = r"C:\Users\janth\PycharmProjects\ChessImplementation\Piece Images\w_king_png_256px.png"
 
     # Takes in position of piece and returns list of valid moves based on current board state
     def get_possible_moves(self, i, j):
